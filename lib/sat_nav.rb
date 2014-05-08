@@ -21,11 +21,23 @@ class SatNav
     all_routes = []
     current_route = [start_name]
     start = @junctions[start_name]
-    max_length = options[:max_junctions]
 
-    all_routes = get_routes_for(start, destination_name, current_route, all_routes, max_length)
+    exact_length = options[:junctions]
+    max_length = exact_length ? exact_length : options[:max_junctions]
 
-    all_routes.length
+    routes = get_routes_for(start, destination_name, current_route, all_routes, max_length)
+
+    routes = filter_exact(routes, exact_length) if exact_length
+    
+    routes.length
+  end
+
+  private
+
+  def distance_between(start_name, end_name)
+    start, destination = @junctions[start_name], @junctions[end_name]
+    raise "NO SUCH ROUTE" unless start.can_access?(destination)
+    start.to destination
   end
 
   def get_routes_for(start, destination_name, old_route, all_routes, max_length)
@@ -41,11 +53,7 @@ class SatNav
     all_routes.uniq
   end
 
-  private
-
-  def distance_between(start_name, end_name)
-    start, destination = @junctions[start_name], @junctions[end_name]
-    raise "NO SUCH ROUTE" unless start.can_access?(destination)
-    start.to destination
+  def filter_exact(routes, exact_length)
+    routes.select { |route| route.length == exact_length + 1 }
   end
 end

@@ -44,4 +44,9 @@ describe SatNav do
   it "knows the number of routes between C and C, with max 3 junctions" do
     expect(sat_nav.number_of_routes_between("C", "C", max_junctions: 3)).to eq(2)
   end
+
+  # 7
+  it "knows the number of routes between A and C with exactly 4 junctions" do
+    expect(sat_nav.number_of_routes_between("A", "C", junctions: 4)).to eq(3)
+  end
 end
