@@ -7,11 +7,11 @@ class Junction
   end
 
   def to(destination)
-    @distances[destination]
+    @distances[destination.name]
   end
 
   def can_access?(destination)
-    @distances.keys.include?(destination)
+    @distances.keys.include?(destination.name)
   end
 
   private

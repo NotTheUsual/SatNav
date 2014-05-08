@@ -21,7 +21,7 @@ class SatNav
 
   def distance_between(start_name, end_name)
     start, destination = @junctions[start_name], @junctions[end_name]
-    raise "NO SUCH ROUTE" unless start.can_access?(destination.name)
-    start.to(destination.name)
+    raise "NO SUCH ROUTE" unless start.can_access?(destination)
+    start.to destination
   end
 end
