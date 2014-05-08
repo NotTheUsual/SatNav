@@ -14,4 +14,8 @@ describe SatNav do
   it "knows the distance between B and C is 4" do
     expect(sat_nav.distance_of("BC")).to eq(4)
   end
+
+  it "knows the distance of the journey A-B-C" do
+    expect(sat_nav.distance_of("ABC")).to eq(9)
+  end
 end

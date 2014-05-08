@@ -11,9 +11,16 @@ class SatNav
   end
 
   def distance_of(journey)
-    start = @junctions[journey[0]]
-    destination = @junctions[journey[1]]
+    return distance_between(journey[0], journey[1]) if journey.length == 2
+    
+    paths = journey.chars.each_cons(2).to_a
+    paths.inject(0) { |sum, (a,b)| sum += distance_between(a,b) }
+  end
 
+  private
+
+  def distance_between(start_name, end_name)
+    start, destination = @junctions[start_name], @junctions[end_name]
     start.to(destination.name)
   end
 end
