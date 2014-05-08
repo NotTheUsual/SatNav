@@ -3,15 +3,19 @@ class Junction
 
   def initialize(name, instructions = [])
     @name = name
-    @distances = {}
-    instructions.each do |instruction|
-      destination = instruction[1]
-      distance = instruction[2]
-      @distances[destination] = distance.to_i
-    end
+    @distances = distances_from(instructions)
   end
 
   def to(destination)
     @distances[destination]
+  end
+
+  private
+
+  def distances_from(instructions)
+    instructions.inject({}) do |distances, instruction|
+      destination, distance = instruction[1], instruction[2].to_i
+      distances.merge(destination => distance)
+    end
   end
 end
