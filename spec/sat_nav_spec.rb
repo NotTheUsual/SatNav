@@ -35,4 +35,7 @@ describe SatNav do
     expect(sat_nav.distance_of("AEBCD")).to eq(21)
   end
 
+  it "knows there's no such route A-E-D" do
+    expect{ sat_nav.distance_of("AED") }.to raise_error("NO SUCH ROUTE")
+  end
 end
