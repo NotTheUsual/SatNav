@@ -10,6 +10,10 @@ class Junction
     @distances[destination]
   end
 
+  def can_access?(destination)
+    @distances.keys.include?(destination)
+  end
+
   private
 
   def distances_from(instructions)

@@ -16,4 +16,10 @@ describe Junction do
     expect(a.to("B")).to eq(4)
     expect(a.to("D")).to eq(3)
   end
+
+  it "knows where it can access" do
+    a = Junction.new("A", ["AB4"])
+    expect(a.can_access?("B")).to be_true
+    expect(a.can_access?("E")).to be_false
+  end
 end
