@@ -59,4 +59,9 @@ describe SatNav do
   it "knows the length of the shortest route between C and C" do
     expect(sat_nav.shortest_route_between("C", "C")).to eq(9)
   end
+
+  # 10
+  it "knows the number of different routes from C to C with a distance of less than 30" do
+    expect(sat_nav.number_of_routes_between("C", "C", max_distance: 30)).to eq(9)
+  end
 end

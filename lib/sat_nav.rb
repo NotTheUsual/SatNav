@@ -24,8 +24,9 @@ class SatNav
 
     exact_length = options[:junctions]
     max_length = exact_length ? exact_length : options[:max_junctions]
+    max_distance = options[:max_distance]
 
-    routes = get_routes_for(start, destination_name, current_route, all_routes, max_length)
+    routes = get_routes_for(start, destination_name, current_route, all_routes, max_length, max_distance)
 
     routes = filter_exact(routes, exact_length) if exact_length
     
@@ -46,15 +47,17 @@ class SatNav
     start.to destination
   end
 
-  def get_routes_for(start, destination_name, old_route, all_routes, max_length)
+  def get_routes_for(start, destination_name, old_route, all_routes, max_length, max_distance = nil)
     start.accessible.each do |junction_name|
-      break if old_route.length > max_length
+      break if max_length && old_route.length > max_length    
 
       current_route = old_route + [junction_name]
 
+      break if max_distance && distance_of(current_route.join) >= max_distance
+
       all_routes << current_route if junction_name == destination_name
       
-      all_routes += get_routes_for(@junctions[junction_name], destination_name, current_route, all_routes, max_length)
+      all_routes += get_routes_for(@junctions[junction_name], destination_name, current_route, all_routes, max_length, max_distance)
     end
     all_routes.uniq
   end
