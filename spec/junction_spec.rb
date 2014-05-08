@@ -23,4 +23,8 @@ describe Junction do
     expect(a.can_access?(b)).to be_true
     expect(a.can_access?(e)).to be_false
   end
+
+  it "knows everywhere it can access" do
+    expect(a.accessible).to eq(["B", "D"])
+  end
 end

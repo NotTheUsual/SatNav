@@ -10,8 +10,12 @@ class Junction
     @distances[destination.name]
   end
 
+  def accessible
+    @distances.keys
+  end
+
   def can_access?(destination)
-    @distances.keys.include?(destination.name)
+    accessible.include?(destination.name)
   end
 
   private
