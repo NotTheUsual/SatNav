@@ -49,4 +49,14 @@ describe SatNav do
   it "knows the number of routes between A and C with exactly 4 junctions" do
     expect(sat_nav.number_of_routes_between("A", "C", junctions: 4)).to eq(3)
   end
+
+  # 8
+  it "knows the length of the shortest route between A and C" do
+    expect(sat_nav.shortest_route_between("A","C")).to eq(9)
+  end
+
+  # 9
+  it "knows the length of the shortest route between C and C" do
+    expect(sat_nav.shortest_route_between("C", "C")).to eq(9)
+  end
 end

@@ -32,6 +32,12 @@ class SatNav
     routes.length
   end
 
+  def shortest_route_between(start_name, destination_name)
+    all_routes = get_routes_for(@junctions[start_name], destination_name, [start_name], [], 5)
+    route_lengths = all_routes.map { |route| distance_of route.join }
+    route_lengths.sort.first
+  end
+
   private
 
   def distance_between(start_name, end_name)
