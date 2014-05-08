@@ -1,3 +1,5 @@
+require_relative 'junction'
+
 class SatNav
   attr_reader :junctions
 
